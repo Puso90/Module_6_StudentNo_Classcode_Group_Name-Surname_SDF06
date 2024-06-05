@@ -4,7 +4,8 @@ import {getDatabase, ref, push, onValue, remove} from "https://www.gstatic.com/f
 //Databse Setup | Communicating with databse attributes
 const appSettings = { 
     databaseURL:"https://realtime-database-6328b-default-rtdb.europe-west1.firebasedatabase.app/" 
-}
+} 
+
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const shoppingListInDB = ref(database, "shoppingList")
@@ -15,15 +16,16 @@ const addButtonEl = document.getElementById("add-button")
 const shoppingListEl = document.getElementById("shopping-list")
 
 
+
 addButtonEl.addEventListener("click", function() {
     let inputValue = inputFieldEl.value
 
     push(shoppingListInDB, inputValue)
-    
+
     clearInputFieldEl()
 
-    
 })
+
 
 onValue(shoppingListInDB, function(snapshot) {
 
@@ -38,12 +40,12 @@ onValue(shoppingListInDB, function(snapshot) {
             let currentItemID = currentItem[0]
             let currentItemValue = currentItem[1]
 
-            appendItemToShoppingListEl(currentItemValue)
+            appendItemToShoppingListEl(currentItem)
         }
-    } else {
-        shoppingListEl.innerHTML = "No Items Here...Yet"
+    } else { 
+        shoppingListEl.innerHTML ="No Items Here...Yet"
     } 
-    
+   
 })
 
 function clearShoppingListEl() {
